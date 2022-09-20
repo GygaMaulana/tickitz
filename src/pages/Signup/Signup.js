@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/signup/bg-2.png";
 import logo2 from "../../assets/tickitz-logo.png";
 import "./signup.css";
-import "./mobile.css"
+import "./mobile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,8 +11,8 @@ import { AuthRegister } from "../../redux/actions/Register";
 const Signup = () => {
   const [password, setPassword] = useState(false);
   const togglePassword = () => {
-    setPassword(!password)
-  }
+    setPassword(!password);
+  };
 
   const dispatch = useDispatch();
   const { error, loading, isRegister } = useSelector((state) => state.register);
@@ -30,7 +30,7 @@ const Signup = () => {
   };
 
   let navigate = useNavigate();
-
+  
   useEffect(() => {
     if (isRegister === true) {
       alert("Register success");
@@ -42,7 +42,7 @@ const Signup = () => {
 
   return (
     <>
-        <div className="split-su left-su">
+      <div className="split-su left-su">
         <div className="logo-su">
           <Link to="/">
             <img src={logo} alt="tickitz" />

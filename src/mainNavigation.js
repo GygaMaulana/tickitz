@@ -9,17 +9,22 @@ import {
   Signup,
   UpdatePassword,
 } from "./pages";
+import MovieDetails from "./pages/MovieDetails";
+import PublicRoute from "./route/PublicRoute";
+
+
 
 const MainNavigation = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/updatepassword" element={<UpdatePassword />} />
+        <Route path="/" element={<PublicRoute><Home /></PublicRoute>} />
+        <Route path="/movies" element={<PublicRoute><Movies /></PublicRoute>} />
+        <Route path="/details/:movieID" element={<PublicRoute><MovieDetails /></PublicRoute>} />
+        <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
+        <Route path="/signin" element={<PublicRoute isRestricted={true}><Signin /></PublicRoute>} />
+        <Route path="/forgotpassword" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+        <Route path="/updatepassword" element={<PublicRoute><UpdatePassword /></PublicRoute>} />
       </Routes>
     </BrowserRouter>
   );

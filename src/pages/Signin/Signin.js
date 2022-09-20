@@ -16,22 +16,25 @@ const Signin = () => {
 
   let navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data, error, loading, isLogin } = useSelector((state) => state.auth);
+  const { error, loading, isLogin } = useSelector((state) => state.auth);
   const [formLogin, setFormLogin] = useState({
     email: "",
     password: "",
   });
+
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(AuthLogin(formLogin));
   };
+  
   useEffect(() => {
     if (isLogin === true) {
+      alert('Login Success')
       navigate("/", { replace: true }); //kita menghapus routing login dari browser
     } else {
       navigate("/signin", { replace: true });
     }
-  }, [isLogin]);
+  }, [isLogin, navigate]);
 
   return (
     <>
@@ -55,7 +58,7 @@ const Signin = () => {
           <form onSubmit={handleLogin}>
             <label htmlFor="">Email</label>
             <br />
-            <input type="email" placeholder="Enter your email" required
+            <input type="text" name='email' placeholder="Enter your email"
               onChange={(e) => {
                 setFormLogin((prevData) => ({
                   ...prevData,
@@ -83,7 +86,7 @@ const Signin = () => {
             ) : (
               <button>Sign In</button>
             )}
-            {error && <div>{error.message}</div>}
+            {error && <div className="text-center mt-3" style={{color: 'red'}}>{error.message}</div>}
             <br />
             <p className="bottom">Forgot your password? <Link to="/forgotpassword">Reset now</Link></p>
             <p className="bottom">Don't have and account? <Link to="/signup">Sign Up</Link></p>

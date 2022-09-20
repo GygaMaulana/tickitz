@@ -5,12 +5,12 @@ import Slider from "react-slick";
 import axios from 'axios'
 
 const UpcomingMovies = () => {
-  const [movieSchedule, setMovieSchedule] = useState([])
+  const [movieSchedule, setMovieSchedule] = useState(null)
 
   useEffect(() => {
     axios({
       method: "GET",
-      url: "http://localhost:3006/api/v1/schedule",
+      url: `http://localhost:3006/api/v1/movies`,
     }).then((res) => {
       setMovieSchedule(res.data.data);
     }).catch((err)=> {
@@ -18,9 +18,6 @@ const UpcomingMovies = () => {
     })
   }, []);
 
-  const Loading = () => {
-    <div>Loading...</div>
-  }
   const settings = {
     infinite: false,
     speed: 500,
@@ -45,7 +42,7 @@ const UpcomingMovies = () => {
   };
   const config = {
     infinite: true,
-    autoplay:false,
+    autoplay: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -72,7 +69,7 @@ const UpcomingMovies = () => {
         <div className="container">
           <div className="um-title">
             <h2>Upcoming Movies</h2>
-            <Link to="/">view all</Link>
+            <Link to="/movies">view all</Link>
           </div>
 
           <Slider {...settings}>
@@ -91,14 +88,14 @@ const UpcomingMovies = () => {
           </Slider>
 
           <Slider {...config}>
-            {!movieSchedule.length ? (<Loading/>) : movieSchedule.map((movie, index)=> {
+            {movieSchedule?.results?.map((movie, index)=> {
               return (
                 <div className="um-card-items" key={index}>
-                  <img src={movie.cover} alt="black widow" title={movie.title}/>
+                  <img src={`http://localhost:3006/uploads/${movie.cover}`} alt={movie.title} title={movie.title}/>
                   <div className="um-details">
                     <div className="m-title">{movie.title}</div>
-                    <div className="m-genre">{movie.categoryName}</div>
-                    <button>Details</button>
+                    <div className="m-genre">{movie.genre}</div>
+                    <Link to={`/details/${movie.movieID}`}><button>Details</button></Link>
                   </div>
                 </div>
               )
