@@ -12,7 +12,7 @@ const NowShowing = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `http://localhost:3006/api/v1/schedule`,
+      url: `https://tickitz-debe.herokuapp.com/api/v1/schedule`,
     }).then((res) => {
       setMovieSchedule(res.data.data);
     }).catch((err)=> {
@@ -69,7 +69,7 @@ const NowShowing = () => {
             {!movieSchedule?.length ? (<Loading/>) : movieSchedule?.map((movie, index)=> {
                 return (
                   <div className="nw-box-items" key={index}>
-                    <img src={`http://localhost:3006/uploads/${movie.cover}`} alt={movie.title} title={movie.title}/>
+                    <img src={`https://tickitz-debe.herokuapp.com/uploads/${movie.cover}`} alt={movie.title} title={movie.title}/>
                     <div className={"nw-item-details"}>
                       <div className="movie-title">{movie.title}</div>
                       <div className="movie-genre">{movie.genre}</div>
