@@ -12,7 +12,7 @@ const NowShowing = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `https://tickitz-debe.herokuapp.com/api/v1/schedule`,
+      url: `https://tickitz-debe.herokuapp.com/api/v1/movies`,
     }).then((res) => {
       setMovieSchedule(res.data.data);
     }).catch((err)=> {
