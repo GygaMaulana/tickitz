@@ -7,6 +7,7 @@ import Slider from 'react-slick'
 
 const NowShowing = () => {
   const [movieSchedule, setMovieSchedule] = useState([])
+
   console.log(movieSchedule.results, 'awoekowake')
 
   useEffect(() => {
@@ -66,7 +67,7 @@ const NowShowing = () => {
           </div>
             
           <Slider {...config}>
-            {!movieSchedule?.length ? (<Loading/>) : movieSchedule?.map((movie, index)=> {
+            {!movieSchedule?.length ? (<Loading/>) : movieSchedule?.results?.map((movie, index)=> {
                 return (
                   <div className="nw-box-items" key={index}>
                     <img src={`https://tickitz-debe.herokuapp.com/uploads/${movie.cover}`} alt={movie.title} title={movie.title}/>
